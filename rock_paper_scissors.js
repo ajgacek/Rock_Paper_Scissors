@@ -21,3 +21,12 @@ function getComputerChoice() {
 }
 
 console.log(ComputerChoice);
+
+let HumanChoice;
+getHumanChoice();
+
+function getHumanChoice() {
+    HumanChoice = prompt("What's your choice?"); 
+}
+
+console.log(HumanChoice); 
