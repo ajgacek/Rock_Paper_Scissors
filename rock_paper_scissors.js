@@ -24,6 +24,10 @@ let humanChoice;
 function getHumanChoice() {
     let human = prompt("What's your choice?");
     humanChoice = human.toLowerCase(); 
+    if (!(humanChoice == "rock" || humanChoice == "paper" || humanChoice == "scissors")) {
+        console.log("That choice is not an option! Pick one of rock, paper, or scissors!"); 
+        getHumanChoice();
+    }
 } 
 
 playGame();
