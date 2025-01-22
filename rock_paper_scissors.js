@@ -1,5 +1,4 @@
 let computerChoice;
-getComputerChoice();
 
 function getComputerChoice() {
     random_number = Math.floor(Math.random() * 3);
@@ -20,24 +19,38 @@ function getComputerChoice() {
     }
 }
 
-console.log(computerChoice);
-
 let humanChoice;
-getHumanChoice();
 
 function getHumanChoice() {
     let human = prompt("What's your choice?");
     humanChoice = human.toLowerCase(); 
-}
+} 
 
-console.log(humanChoice); 
+playGame();
 
-let humanScore = 0;
-let computerScore = 0; 
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0; 
 
-playRound(humanChoice, computerChoice);
+    for (i = 0; i < 5; i++) {
+        getComputerChoice();
+        getHumanChoice();
+        playRound(humanChoice, computerChoice);
+    }
 
-function playRound (humanChoice, computerChoice) {
+    console.log("Your Score: ", humanScore);
+    console.log("Computer's Score: ", computerScore);
+    if (humanScore > computerScore) {
+        console.log("Congrats, you win!");
+    }
+    else if (humanScore < computerScore) {
+        console.log("Sorry, you lose!");
+    }
+    else {
+        console.log("You both tied!");
+    }
+
+    function playRound (humanChoice, computerChoice) {
 
     if (humanChoice == "rock") {
         switch (computerChoice) {
@@ -85,6 +98,8 @@ function playRound (humanChoice, computerChoice) {
                 console.log("Tie! You both picked scissors!");
                 break;
         }
+    }
+
     }
 
 }
