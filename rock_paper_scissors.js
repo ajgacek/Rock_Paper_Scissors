@@ -1,5 +1,8 @@
 let computerChoice;
 
+let humanScore = 0; 
+let computerScore = 0; 
+
 function getComputerChoice() {
     random_number = Math.floor(Math.random() * 3);
 
@@ -19,28 +22,114 @@ function getComputerChoice() {
     }
 }
 
+
 let humanChoice;
 
-function getHumanChoice() {
-    let human = prompt("What's your choice?");
-    humanChoice = human.toLowerCase(); 
-    if (!(humanChoice == "rock" || humanChoice == "paper" || humanChoice == "scissors")) {
-        console.log("That choice is not an option! Pick one of rock, paper, or scissors!"); 
-        getHumanChoice();
-    }
-} 
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
 
-playGame();
+rock.addEventListener("click", function() {
+    getComputerChoice();
+    playRound ("rock", computerChoice);
+});
+
+paper.addEventListener("click", function(){
+    getComputerChoice();
+    playRound ("paper", computerChoice);    
+});
+
+scissors.addEventListener("click", function() {
+    getComputerChoice();
+    playRound ("scissors", computerChoice);
+});
+
+function playRound (humanChoice, computerChoice) {
+
+    if (humanChoice == "rock") {
+        switch (computerChoice) {
+            case "rock":
+                console.log("Tie! You both picked rock");
+                break;
+            case "paper":
+                console.log("You lose! Paper beats rock!");
+                computerScore++;
+                document.querySelector("#computerScore").textContent = "Computer Score: " + computerScore;
+                break;
+            case "scissors":
+                console.log("You win! Rock beats paper");
+                humanScore++; 
+                document.querySelector("#humanScore").textContent = "Human Score: " + humanScore;
+                break;
+        }
+    }
+
+    if (humanChoice == "paper") {
+        switch (computerChoice) {
+            case "rock":
+                console.log("You win! Paper beats rock!");
+                humanScore++;
+                document.querySelector("#humanScore").textContent = "Human Score: " + humanScore;
+                break;
+            case "paper":
+                console.log("Tie! You both picked paper!");
+                break; 
+            case "scissors":
+                console.log("You lose! Scissors beats paper");
+                computerScore++; 
+                document.querySelector("#computerScore").textContent = "Computer Score: " + computerScore;
+                break;
+        }
+    }
+
+    if (humanChoice == "scissors") {
+        switch(computerChoice) {
+            case "rock":
+                console.log("You lose! Rock beats scissors!");
+                computerScore++; 
+                document.querySelector("#computerScore").textContent = "Computer Score: " + computerScore;
+                break;
+            case "paper":
+                console.log("You win! Scissors beats paper!"); 
+                humanScore++; 
+                document.querySelector("#humanScore").textContent = "Human Score: " + humanScore;
+                break; 
+            case "scissors":
+                console.log("Tie! You both picked scissors!");
+                break;
+        }
+    }
+
+    if (humanScore == 5) {
+        document.querySelector("#humanScore").textContent = "Human Score: " + humanScore;
+        alert("You win!");
+        setTimeout (() => {
+            humanScore = 0;
+            document.querySelector("#humanScore").textContent = "Human Score: " + humanScore; 
+            computerScore = 0;
+            document.querySelector("#computerScore").textContent = "Computer Score: " + computerScore;
+        }, 100);
+    }
+
+    if (computerScore == 5) {
+        document.querySelector("#computerScore").textContent = "Computer Score: " + computerScore;
+        alert("Computer wins!");
+        setTimeout (() => {
+        humanScore = 0; 
+        document.querySelector("#humanScore").textContent = "Human Score: " + humanScore;
+        computerScore = 0; 
+        document.querySelector("#computerScore").textContent = "Computer Score: " + computerScore;
+        }, 100); 
+    }
+
+}
+
+
+/*playGame();
 
 function playGame() {
     let humanScore = 0;
     let computerScore = 0; 
-
-    for (i = 0; i < 5; i++) {
-        getComputerChoice();
-        getHumanChoice();
-        playRound(humanChoice, computerChoice);
-    }
 
     console.log("Your Score: ", humanScore);
     console.log("Computer's Score: ", computerScore);
@@ -54,56 +143,4 @@ function playGame() {
         console.log("You both tied!");
     }
 
-    function playRound (humanChoice, computerChoice) {
-
-    if (humanChoice == "rock") {
-        switch (computerChoice) {
-            case "rock":
-                console.log("Tie! You both picked rock");
-                break;
-            case "paper":
-                console.log("You lose! Paper beats rock!");
-                computerScore++; 
-                break;
-            case "scissors":
-                console.log("You win! Rock beats paper");
-                humanScore++; 
-                break;
-        }
-    }
-
-    if (humanChoice == "paper") {
-        switch (computerChoice) {
-            case "rock":
-                console.log("You win! Paper beats rock!");
-                humanScore++;
-                break;
-            case "paper":
-                console.log("Tie! You both picked paper!");
-                break; 
-            case "scissors":
-                console.log("You lose! Scissors beats paper");
-                computerScore++; 
-                break;
-        }
-    }
-
-    if (humanChoice == "scissors") {
-        switch(computerChoice) {
-            case "rock":
-                console.log("You lose! Rock beats scissors!");
-                computerScore++; 
-                break;
-            case "paper":
-                console.log("You win! Scissors beats paper!"); 
-                humanScore++; 
-                break; 
-            case "scissors":
-                console.log("Tie! You both picked scissors!");
-                break;
-        }
-    }
-
-    }
-
-}
+}*/
